@@ -1,14 +1,8 @@
 import {
-	Dimensions,
-	NativeTouchEvent,
 	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { gradient_colours } from '../../constants/theme';
 
 let timeout = undefined;
 
@@ -16,13 +10,12 @@ const GradientAnimatedQuick = () => {
 	//CONST
 	const COLOURS = ['#00BF6F', '#FDDA25', '#71DBD4', '#00BF6F'];
 	const GRADIENT_POINTS = [0, 0.5, 1, 1];
-	const MOVEMENT = GRADIENT_POINTS[1] / 360; // speed of movement
+	const MOVEMENT = GRADIENT_POINTS[1] / 460; // speed of movement
 	const SPEED = 30; // updates every 30ms
 
-	const START_COORD = {x: 0.4, y: 0 }
+	const START_COORD = { x: 0.4, y: 0 };
 	const END_COORD = { x: 0.6, y: 1 };
 	// to be used for dynamic directio of gradient
-
 
 	let ascXVar = true;
 	const [ascX, setAscX] = useState(true);
@@ -33,12 +26,6 @@ const GradientAnimatedQuick = () => {
 		start: START_COORD,
 		end: END_COORD,
 	});
-
-	
-	// using useRef will allow us use the persistent state prior to rerendering
-	const gradientOptionsRef = useRef(gradientOptions);
-	gradientOptionsRef.current = gradientOptions;
-
 
 	useEffect(() => {
 		// animateGradientWithState();
@@ -103,6 +90,10 @@ const GradientAnimatedQuick = () => {
 	// 	timeout = setTimeout(animateGradientWithState, SPEED);
 	// };
 
+	// using useRef will allow us use the persistent state prior to rerendering
+	const gradientOptionsRef = useRef(gradientOptions);
+	gradientOptionsRef.current = gradientOptions;
+
 	let animateGradient = () => {
 		if (
 			gradientOptionsRef.current.gradientLocations[1] -
@@ -122,12 +113,9 @@ const GradientAnimatedQuick = () => {
 			// console.log(gradientColors, 'COLOURS')
 
 			// dynamic direction change - WIP, still buggy
-			console.log('updating direction ')
+			console.log('updating direction ');
 			console.log(gradientOptionsRef.current.start);
-						console.log(
-							gradientOptionsRef
-								.current.end
-						);
+			console.log(gradientOptionsRef.current.end);
 
 			let start = gradientOptionsRef.current.start;
 			let startX = start.x + directionShiftSpeed;
@@ -145,7 +133,10 @@ const GradientAnimatedQuick = () => {
 			}
 			let stop = gradientOptionsRef.current.start;
 			let stopX = start.x + directionShiftSpeed;
-			stopX = ascXVar == true ? stop.x - directionShiftSpeed : stop.x + directionShiftSpeed;
+			stopX =
+				ascXVar == true
+					? stop.x - directionShiftSpeed
+					: stop.x + directionShiftSpeed;
 			//end
 
 			setGradientOptions({
@@ -184,8 +175,6 @@ const GradientAnimatedQuick = () => {
 					}
 				);
 
-
-
 			setGradientOptions({
 				colours: [
 					...gradientOptionsRef.current.colours,
@@ -198,7 +187,6 @@ const GradientAnimatedQuick = () => {
 
 		timeout = setTimeout(animateGradient, SPEED);
 	};
-
 
 	// const updateDirection = () => {
 	// 	console.log('updating direction');
