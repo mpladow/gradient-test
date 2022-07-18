@@ -1,32 +1,66 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native';
-import GradientAnimated from './App/Components/Molecules/GradientAnimated';
-import GradientAnimatedQuick from './App/Components/Molecules/GradientAnimatedQuick';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
+import Loading from "./App/Components/AnimatedApi/Loading1";
+import Roation from "./App/Components/AnimatedApi/Roation";
+import CButton from "./App/Components/Atoms/CButton";
+import GradientAnimated from "./App/Components/Molecules/GradientAnimated";
+import GradientAnimatedQuick from "./App/Components/Molecules/GradientAnimatedQuick";
 
 export default function App() {
-	const [coords, setCoords] = useState({ x: 0.2, y: 0 })
-	const handleTouch = (e) => {
-		console.log(e.location, 'TOUCH')
-	}
-	return (
-		<View style={ styles.container }>
+  const [coords, setCoords] = useState({ x: 0.2, y: 0 });
+  const handleTouch = (e) => {
+    console.log(e.location, "TOUCH");
+  };
+  const [showGradient, setShowGradient] = useState(true);
+  const [showLoader, setShowLoader] = useState(false);
+  const [showRotation, setShowRotation] = useState(false)
 
-				<GradientAnimatedQuick />
+  const onShowGradientHandler = () => {
+    setShowGradient(true);
+    setShowLoader(false);
+	setShowRotation(false)
+  };
+  const onShowLoaderHandler = () => {
+    setShowGradient(false);
+    setShowLoader(true);
+	setShowRotation(false)
+  };
+  const onShowRotation = () => {
+	setShowGradient(false);
+    setShowLoader(false);
+	  setShowRotation(true);
+	  
+  }
+  return (
+    <View style={styles.container}>
+      <View style={{position: "absolute", top: 0, left: 0, zIndex: 99}}>
+        <CButton onPress={() => onShowGradientHandler()}>
+          <Text>Show Gradient</Text>
+        </CButton>
+        <CButton onPress={() => onShowLoaderHandler()}><Text>Show Loader</Text></CButton>
+		<CButton onPress={() => onShowRotation()}><Text>Show Rotation </Text></CButton>
 
-
-
-			<StatusBar style="auto" />
-
-		</View>
-	);
+	  </View>
+      {showGradient && <GradientAnimatedQuick />}
+      {showLoader && <Loading />}
+	  {showRotation && <Roation/>}
+      <StatusBar style="auto" />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
