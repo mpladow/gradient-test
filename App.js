@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Loading from "./App/Components/AnimatedApi/Loading1";
-import Roation from "./App/Components/AnimatedApi/Roation";
+import Rotation from "./App/Components/AnimatedApi/Rotation";
 import CButton from "./App/Components/Atoms/CButton";
 import GradientAnimated from "./App/Components/Molecules/GradientAnimated";
 import GradientAnimatedQuick from "./App/Components/Molecules/GradientAnimatedQuick";
@@ -50,7 +50,7 @@ export default function App() {
 	  </View>
       {showGradient && <GradientAnimatedQuick />}
       {showLoader && <Loading />}
-	  {showRotation && <Roation/>}
+	  {showRotation && <Rotation/>}
       <StatusBar style="auto" />
     </View>
   );
