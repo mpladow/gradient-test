@@ -24,6 +24,12 @@ const Loading = () => {
             ]), { iterations: 3 }
         ).start()
     }, [])
+    const interpolateRotation = 
+        progress.interpolate({
+            inputRange: [0.5, 1],
+            outputRange: ['0deg', '720deg']
+        })
+    
 
     return (
         <View>
@@ -35,10 +41,7 @@ const Loading = () => {
                 opacity: progress,
                 transform: [{ scale },
                 {
-                    rotate: progress.interpolate({
-                        inputRange: [0.5, 1],
-                        outputRange: [Math.PI, 2 * Math.PI]
-                    })
+                    rotate: interpolateRotation
                 }]
             }
             ]} />
