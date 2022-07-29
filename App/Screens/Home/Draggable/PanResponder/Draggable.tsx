@@ -1,5 +1,6 @@
 import { Animated, PanResponder, StyleSheet, Text, View } from 'react-native'
 import React, { useRef } from 'react'
+import Container from '../../../../Components/Atoms/Container';
 
 const Draggable = () => {
   const pan = useRef(new Animated.ValueXY()).current;
@@ -25,8 +26,9 @@ const Draggable = () => {
     })
   ).current;
   return (
-    <View style={styles.container}>
+    <Container>
       <Text>Draggable</Text>
+    <Text>A Draggable box that uses panResponder to move a component around the screen</Text>
       <Animated.View
         style={{
           transform: [{ translateX: pan.x },
@@ -34,7 +36,7 @@ const Draggable = () => {
         }} {...panResponder.panHandlers}>
         <View style={styles.box}></View>
       </Animated.View>
-    </View>
+    </Container>
   )
 }
 

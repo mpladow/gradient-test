@@ -1,11 +1,14 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const CButton = (props) => {
+type Props = {
+	onPress: () => void
+}
+const CButton: React.FC<Props> = ({onPress, children}) => {
   return (
-	  <Pressable onPress={props.onPress}>
+	  <Pressable onPress={onPress}>
 	 <View style={styles.button}>
-		<Text>{props.children}</Text>
+		<Text>{children}</Text>
 	 </View>
 	 </Pressable>
   )
